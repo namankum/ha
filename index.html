@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Gaegu:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: black;
+    font-family: 'Gaegu', cursive;
+}
+
+/* 배경 */
+.background {
+    position: fixed;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
+        url('https://github.com/namankum/ha/blob/main/ha.jpg?raw=true');
+    background-size: cover;
+    background-position: center;
+    z-index: 1;
+}
+
+/* 배경 하트 영역 */
+.hearts {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* SVG 하트 아이템 스타일 */
+.heart-item {
+    position: absolute;
+    bottom: -100px;
+    display: block;
+    will-change: transform, opacity;
+    animation: moveUp linear infinite;
+}
+
+/* 하트 개별 설정 - ✅ 기본 투명도를 낮추고 렌더링 최적화 */
+.heart-item:nth-child(1) { left: 8%;  width: 25px; height: 25px; opacity: 0.2; animation-duration: 16s; animation-delay: 0s; }
+.heart-item:nth-child(2) { left: 22%; width: 45px; height: 45px; opacity: 0.35; animation-duration: 22s; animation-delay: 3s; }
+.heart-item:nth-child(3) { left: 38%; width: 30px; height: 30px; opacity: 0.25; animation-duration: 19s; animation-delay: 7s; }
+.heart-item:nth-child(4) { left: 55%; width: 55px; height: 55px; opacity: 0.45; animation-duration: 25s; animation-delay: 1s; }
+.heart-item:nth-child(5) { left: 72%; width: 35px; height: 35px; opacity: 0.2; animation-duration: 18s; animation-delay: 11s; }
+.heart-item:nth-child(6) { left: 88%; width: 40px; height: 40px; opacity: 0.35; animation-duration: 21s; animation-delay: 5s; }
+
+@keyframes moveUp {
+    0% { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+    /* ✅ 등장 시에도 투명도를 더 낮게 설정 */
+    10% { opacity: 0.4; } 
+    30% { transform: translateY(-30vh) translateX(-25px) rotate(15deg); }
+    60% { transform: translateY(-70vh) translateX(25px) rotate(-15deg); }
+    100% { transform: translateY(-125vh) translateX(-10px) rotate(45deg); opacity: 0; }
+}
+
+/* 스크롤 영역 */
+.scroll-area {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 3;
+}
+
+/* 무한 롤링 구조 최적화 */
+.scroll-track {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    animation: infiniteScroll 38s linear infinite;
+}
+
+/* 편지 본문 스타일 */
+.text {
+    max-width: 900px;
+    width: calc(100% - 40px);
+    margin: 0 auto;
+    color: white;
+    text-align: center;
+    font-size: clamp(22px, 2.4vw, 36px);
+    line-height: 2;
+    font-weight: 700;
+    text-shadow:
+        0 0 10px rgba(0,0,0,0.9),
+        0 0 30px rgba(0,0,0,0.7);
+    
+    padding-top: 30vh;
+    padding-bottom: 70vh; 
+}
+
+/* 제목 */
+.title {
+    font-size: clamp(42px, 5vw, 68px);
+    margin-bottom: 60px;
+}
+
+/* 편지 1개가 완전히 올라간 시점(-50%)을 정확하게 일치시키는 애니메이션 */
+@keyframes infiniteScroll {
+    0% {
+        transform: translateY(30vh);
+    }
+    100% {
+        transform: translateY(-50%);
+    }
+}
+
+/* 모바일 대응 */
+@media (max-width: 768px) {
+    .scroll-track {
+        animation: infiniteScroll 42s linear infinite;
+    }
+    .text {
+        font-size: clamp(18px, 5vw, 26px);
+        line-height: 2.1;
+        padding-top: 20vh;
+        padding-bottom: 60vh;
+    }
+    .title {
+        font-size: clamp(34px, 9vw, 48px);
+        margin-bottom: 40px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="background"></div>
+
+<div class="hearts">
+    <svg class="heart-item" viewBox="0 0 32 32">
+        <defs>
+            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" style="stop-color:#ff758c; stop-opacity:0.4" />
+                <stop offset="100%" style="stop-color:#ff7eb3; stop-opacity:0.4" />
+            </linearGradient>
+        </defs>
+        <path fill="url(#grad1)" d="M16,28.25 C16,28.25 2,18.25 2,10.75 C2,6.5 5.5,3 9.75,3 C12.5,3 14.75,4.5 16,6.75 C17.25,4.5 19.5,3 22.25,3 C26.5,3 30,6.5 30,10.75 C30,18.25 16,28.25 16,28.25 Z"/>
+    </svg>
+    <svg class="heart-item" viewBox="0 0 32 32">
+        <path fill="url(#grad1)" d="M16,28.25 C16,28.25 2,18.25 2,10.75 C2,6.5 5.5,3 9.75,3 C12.5,3 14.75,4.5 16,6.75 C17.25,4.5 19.5,3 22.25,3 C26.5,3 30,6.5 30,10.75 C30,18.25 16,28.25 16,28.25 Z"/>
+    </svg>
+    <svg class="heart-item" viewBox="0 0 32 32">
+        <path fill="url(#grad1)" d="M16,28.25 C16,28.25 2,18.25 2,10.75 C2,6.5 5.5,3 9.75,3 C12.5,3 14.75,4.5 16,6.75 C17.25,4.5 19.5,3 22.25,3 C26.5,3 30,6.5 30,10.75 C30,18.25 16,28.25 16,28.25 Z"/>
+    </svg>
+    <svg class="heart-item" viewBox="0 0 32 32">
+        <path fill="url(#grad1)" d="M16,28.25 C16,28.25 2,18.25 2,10.75 C2,6.5 5.5,3 9.75,3 C12.5,3 14.75,4.5 16,6.75 C17.25,4.5 19.5,3 22.25,3 C26.5,3 30,6.5 30,10.75 C30,18.25 16,28.25 16,28.25 Z"/>
+    </svg>
+    <svg class="heart-item" viewBox="0 0 32 32">
+        <path fill="url(#grad1)" d="M16,28.25 C16,28.25 2,18.25 2,10.75 C2,6.5 5.5,3 9.75,3 C12.5,3 14.75,4.5 16,6.75 C17.25,4.5 19.5,3 22.25,3 C26.5,3 30,6.5 30,10.75 C30,18.25 16,28.25 16,28.25 Z"/>
+    </svg>
+    <svg class="heart-item" viewBox="0 0 32 32">
+        <path fill="url(#grad1)" d="M16,28.25 C16,28.25 2,18.25 2,10.75 C2,6.5 5.5,3 9.75,3 C12.5,3 14.75,4.5 16,6.75 C17.25,4.5 19.5,3 22.25,3 C26.5,3 30,6.5 30,10.75 C30,18.25 16,28.25 16,28.25 Z"/>
+    </svg>
+</div>
+
+<div class="scroll-area">
+    <div class="scroll-track">
+
+        <div class="text">
+            <div class="title">
+                🤍 Happy birthday 🤍
+            </div>
+            지원 6/4일 지원이 탄생일 생일 너무 축하해🤍<br><br>
+
+            항상 나 챙겨주고 맛있는 것도 많이 사주고<br>
+            나보다 지원이가 해준게 더 많은 거 같아서 많이 속상하네<br><br>
+
+            그래도 마음만은 항상 지원이를 생각하고 위하고 있어<br><br>
+
+            우리가 일년이 넘는 시간들 동안<br>
+            정말 많은 일들이 있었던 거 같아<br><br>
+
+            그럼에도 우리가 함께 해결하고 맞춰 걸어갔기에<br>
+            지금에 우리가 있는 거겠지?<br><br>
+
+            앞으로 또 어떤 일들이 우리에게 일어날지 모르겠지만<br>
+            지금처럼 우리답게 행복하고 더욱 즐겁게 사랑하자!<br><br>
+
+            20대 처음을 함께보낸 우리인데<br>
+            결혼까지 함께 가는거야!!<br><br>
+
+            어떤 편지를 줘야 할까 고민했는데<br>
+            항상 지원이가 편지 달고 다녔으면 좋겠어<br><br>
+
+            우리가 함께하는 두번째 지원이 생일도<br>
+            나랑 보내줘서 고마워<br><br>
+
+            앞으로 세번째 네번째 모두 나랑 촛불불자<br><br>
+
+            생일 너무 축하하고 태어나줘서 고마워<br><br>
+
+            사랑해 지원 🤍🤍
+        </div>
+
+        <div class="text">
+            <div class="title">
+                🤍 Happy birthday 🤍
+            </div>
+            지원 6/4일 지원이 탄생일 생일 너무 축하해🤍<br><br>
+
+            항상 나 챙겨주고 맛있는 것도 많이 사주고<br>
+            나보다 지원이가 해준게 더 많은 거 같아서 많이 속상하네<br><br>
+
+            그래도 마음만은 항상 지원이를 생각하고 위하고 있어<br><br>
+
+            우리가 일년이 넘는 시간들 동안<br>
+            정말 많은 일들이 있었던 거 같아<br><br>
+
+            그럼에도 우리가 함께 해결하고 맞춰 걸어갔기에<br>
+            지금에 우리가 있는 거겠지?<br><br>
+
+            앞으로 또 어떤 일들이 우리에게 일어날지 모르겠지만<br>
+            지금처럼 우리답게 행복하고 더욱 즐겁게 사랑하자!<br><br>
+
+            20대 처음을 함께보낸 우리인데<br>
+            결혼까지 함께 가는거야!!<br><br>
+
+            어떤 편지를 줘야 할까 고민했는데<br>
+            항상 지원이가 편지 달고 다녔으면 좋겠어<br><br>
+
+            우리가 함께하는 두번째 지원이 생일도<br>
+            나랑 보내줘서 고마워<br><br>
+
+            앞으로 세번째 네번째 모두 나랑 촛불불자<br><br>
+
+            생일 너무 축하하고 태어나줘서 고마워<br><br>
+
+            사랑해 지원 🤍🤍
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
